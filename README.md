@@ -23,17 +23,19 @@ cd conKube
 and then run the canned setup scripts from the clone repo tree. 
 
 # Cleaning Up
-After exiting the shell scripts, you can kill the associated DinD container for the cluster, and remove the Docker network that was created for this cluster using the clean cluster scripts.
-For example, to clean up after cluster 1:
+After exiting the canned startup shell scripts, you can kill the associated DinD containers for the clusters and remove the Docker networks that were created for the clusters using the associated clean cluster scripts.
+For example, to clean up after clusters 1 and 2  by curling the cleanup scripts from this repo:
+```
+cd ~/temp && curl -L https://raw.githubusercontent.com/leblancd/conKube/master/clean_cluster_1.sh > clean_cluster_1.sh && chmod +x clean_cluster_1.sh && ./clean_cluster_1.sh
+cd ~/temp && curl -L https://raw.githubusercontent.com/leblancd/conKube/master/clean_cluster_2.sh > clean_cluster_2.sh && chmod +x clean_cluster_2.sh && ./clean_cluster_2.sh
+```
+Or, if you have a cloned copy of this repo, run the cleanup scripts directly:
 ```
 cd ~/conKube
 ./clean_cluster_1.sh
-```
-and to clean up after cluster 2:
-```
-cd ~/conKube
 ./clean_cluster_2.sh
 ```
+
 # IPv6 Support
 IPv6 clusters are supported. Documentation and canned scripts will be provided shortly.
 
