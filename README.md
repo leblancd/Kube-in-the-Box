@@ -1,29 +1,26 @@
 # conKube
 Utility for creating (possibly multiple) containerized, multi-node Kubernetes cluster(s) on a single host
 
-# Installation
+# Simplest Way to Create Kubernetes Clusters
+This repo provides a few canned setup scripts that can be used to spin up Kubernetes clusters with a predetermined topology.
+The simplest way to spin up a Kubernetes cluster on your host is to curl one of these scripts and run it on a single command line, e.g.:
+```
+cd ~/temp && curl -L https://raw.githubusercontent.com/leblancd/conKube/master/cluster_up_1.sh > cluster_up_1.sh && chmod +x cluster_up_1.sh && ./cluster_up_1.sh
+```
+This script will set you in a shell script running in a container, from which you can run kubectl commands and/or 'docker exec ...' into your Kubernetes node containers.
 
+To set up a second cluster, run the following in a separate window:
+```
+cd ~/temp && curl -L https://raw.githubusercontent.com/leblancd/conKube/master/cluster_up_2.sh > cluster_up_2.sh && chmod +x cluster_up_2.sh && ./cluster_up_2.sh
+```
+
+Another way to run the canned setup scripts would be to clone this repo:
 ```
 cd
 git clone https://github.com/leblancd/conKube.git
+cd conKube
 ```
-
-# Creating Kubernetes Clusters
-## Creating First Cluster
-```
-cd ~/conKube
-./cluster_up_1.sh
-```
-After creating a multi-node, containerized cluster, the script will leave you in a shell. From this shell, you can run kubectl commands or 'docker exec ...' into the Kubernetes node containers.
-
-## Creating Second Cluster
-If desired, a second cluster can be created, in a separate window:
-```
-cd ~/conKube
-./cluster_up_2.sh
-```
-Similar to the creation of the first cluster, the script will
-leave you in a shell. From this shell, you can run kubectl commands or 'docker exec ...' into the Kubernetes node containers.
+and then run the canned setup scripts from the clone repo tree. 
 
 # Cleaning Up
 After exiting the shell scripts, you can kill the associated DinD container for the cluster, and remove the Docker network that was created for this cluster using the clean cluster scripts.
