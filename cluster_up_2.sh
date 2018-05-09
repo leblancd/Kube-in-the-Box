@@ -13,10 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -o errexit
 set -o nounset
-set -o pipefail
-set -o errtrace
 
 DOCKER_NETWORK_CIDR=172.62.0.0/16
 DOCKER_NETWORK_NAME=k8s-cluster-net-2
