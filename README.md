@@ -1,7 +1,7 @@
 # conKube
-Utility for creating (possibly multiple) containerized, multi-node Kubernetes cluster(s) on a single host
+Utility for creating one or more containerized, multi-node Kubernetes cluster(s) on a single host
 
-# Simplest Way to Create Kubernetes Clusters
+# Creating a Containerized, Multi-Node Cluster: All you need is docker and a script!
 This repo provides a few canned setup scripts that can be used to spin up Kubernetes clusters with a predetermined topology.
 The simplest way to spin up a Kubernetes cluster on your host is to curl one of these scripts and run it on a single command line, e.g.:
 ```
