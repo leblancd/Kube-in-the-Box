@@ -27,7 +27,11 @@ ip route add ${DIND_SUBNET}/${DIND_SUBNET_SIZE} via ${DOCKER_HOST_IP} dev eth0
 
 export SKIP_SNAPSHOT=yes
 export LOG=file
-export DOCKER_HOST=${DOCKER_HOST_IP}:${DOCKER_HOST_PORT}
+if [ "$IP_MODE" = "ipv6" ]; then
+    export DOCKER_HOST=[${DOCKER_HOST_IP}]:${DOCKER_HOST_PORT}
+else
+    export DOCKER_HOST=${DOCKER_HOST_IP}:${DOCKER_HOST_PORT}
+fi
 
 echo Running dind-cluster-v1.10.sh to bring up a cluster
 /root/kubeadm-dind-cluster/fixed/dind-cluster-v1.10.sh up
