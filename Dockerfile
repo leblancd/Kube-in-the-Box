@@ -44,14 +44,9 @@ RUN apt-get update && \
 
 EXPOSE 8080
 
-# Install kubeadm-dind-cluster scripts
+# Clone the stable-fixed-version branch of the kubeadm-dind-cluster scripts
 RUN cd /root && \
-    git clone https://github.com/Mirantis/kubeadm-dind-cluster.git
-
-#ENV SHELL bash
-#ENV IP_MODE ipv4
-#ENV REMOTE_DNS64_V4SERVER 173.37.87.157
-#ENV DOCKER_HOST 172.62.0.2:2375
+    git clone https://github.com/Mirantis/kubeadm-dind-cluster.git --branch stable-fixed-version
 
 WORKDIR /workspace
 ADD runner /

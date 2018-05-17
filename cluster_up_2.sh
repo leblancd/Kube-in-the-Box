@@ -13,7 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -x
+set -o errexit
 set -o nounset
+set -o errtrace
 
 DOCKER_NETWORK_CIDR=172.62.0.0/16
 DOCKER_NETWORK_NAME=k8s-cluster-net-2
@@ -28,6 +31,15 @@ DIND_CONTAINER_NAME=dind-2
 CONKUBE_CONTAINER_NAME=k8s-cluster-2
 DOCKER_IMAGE=diverdane/conkube
 
+# Disable swaps
+grep dev /proc/swaps | while read line
+do
+    SWAP=$(echo $line | awk '{print $1}';)
+    echo Disabling swap $SWAP
+    swapoff -v $SWAP
+    rm $SWAP
+done
+
 # Create a user defined network
 echo Creating docker network
 docker network create --subnet ${DOCKER_NETWORK_CIDR} ${DOCKER_NETWORK_NAME}
@@ -39,7 +51,6 @@ docker run --privileged --rm --network ${DOCKER_NETWORK_NAME} --name ${DIND_CONT
 # Run a container that will run Kubeadm-DinD-Cluster scripts to spin up
 # a virtualized, multi-node Kubernetes cluster.
 echo Running a conKube \(containerized Kubernetes cluster\) container
-
 docker run -it --privileged --rm \
     --network ${DOCKER_NETWORK_NAME} --name ${CONKUBE_CONTAINER_NAME} \
     --cap-add=ALL -v /lib/modules:/lib/modules \

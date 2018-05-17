@@ -34,7 +34,7 @@ else
 fi
 
 echo Running dind-cluster-v1.10.sh to bring up a cluster
-/root/kubeadm-dind-cluster/fixed/dind-cluster-v1.10.sh up
+/root/kubeadm-dind-cluster/fixed/dind-cluster-stable.sh up
 
 # Start up a bash shell
 exec bash
