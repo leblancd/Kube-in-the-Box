@@ -1,5 +1,5 @@
 # Kube-in-the-Box
-Utility for creating one or more containerized, multi-node Kubernetes cluster(s) on a single host
+Kube-in-the-Box is a utility for creating one or more containerized, multi-node Kubernetes cluster(s) on a single host. It is based on the Kubernetes Kubeadm DinD Cluster (K-D-C), and works by spinning up each K-D-C cluster in its own DinD container (i.e. in a Docker-in-Docker-in-Docker, or DinDinD configuration). 
 
 # Creating a Containerized, Multi-Node Cluster: All you need is docker and a script!
 This repo provides a few canned setup scripts that can be used to spin up Kubernetes clusters with a predetermined topology.
