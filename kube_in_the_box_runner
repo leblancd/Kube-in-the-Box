@@ -19,7 +19,7 @@ export SKIP_SNAPSHOT=yes
 export LOG=file
 
 # enable IPv6 if requested (requires container to be run privileged mode)
-export IP_MODE=${IP_MODE:-false}
+export IP_MODE=${IP_MODE:-ipv4}
 if [[ "${IP_MODE}" == "ipv6" ]]; then
     sysctl -w net.ipv6.conf.all.disable_ipv6=0
 fi
