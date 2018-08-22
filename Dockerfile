@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM gcr.io/k8s-testimages/kubekins-e2e:v20180102-0e2b24a0b-master
+FROM gcr.io/k8s-testimages/kubekins-e2e:v20180730-8b7ab3104-master
 LABEL maintainer "leblancd@cisco.com"
 
 # make systemd behave correctly in Docker container
@@ -42,12 +42,10 @@ RUN apt-get update && \
     apt-get -y autoremove && \
     apt-get clean
 
-EXPOSE 8080
-
+ENV DOCKER_IN_DOCKER_ENABLED "true"
 # Clone the stable-fixed-version branch of the kubeadm-dind-cluster scripts
 RUN cd /root && \
-    git clone https://github.com/Mirantis/kubeadm-dind-cluster.git --branch stable-fixed-version
+    git clone https://github.com/leblancd/kubeadm-dind-cluster.git --branch dockernet-172.20.0.0
 
-WORKDIR /workspace
-ADD runner /
-ENTRYPOINT ["/bin/bash", "/runner"]
+ADD kube_in_the_box_runner /
+ENTRYPOINT ["/bin/bash", "/kube_in_the_box_runner"]

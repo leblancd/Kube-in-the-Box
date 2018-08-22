@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2017 The Kubernetes Authors.
+# Copyright 2018 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,27 +15,15 @@
 
 set -x
 
-#if [ ! -e test-infra ]; then
-#    git clone https://github.com/kubernetes/test-infra
-#fi
-
-# Enable IPv6
-sysctl -w net.ipv6.conf.all.disable_ipv6=0
-
-# Add route to pod network
-ip route add ${DIND_SUBNET}/${DIND_SUBNET_SIZE} via ${DOCKER_HOST_IP} dev eth0
-
 export SKIP_SNAPSHOT=yes
 export LOG=file
-if [ "$IP_MODE" = "ipv6" ]; then
-    export DOCKER_HOST=[${DOCKER_HOST_IP}]:${DOCKER_HOST_PORT}
-else
-    export DOCKER_HOST=${DOCKER_HOST_IP}:${DOCKER_HOST_PORT}
+
+# enable IPv6 if requested (requires container to be run privileged mode)
+export IPV6_ENABLED=${IPV6_ENABLED:-false}
+if [[ "${IPV6_ENABLED}" == "true" ]]; then
+    sysctl -w net.ipv6.conf.all.disable_ipv6=0
 fi
 
-echo Running dind-cluster-v1.10.sh to bring up a cluster
-/root/kubeadm-dind-cluster/fixed/dind-cluster-stable.sh up
-
-# Start up a bash shell
-exec bash
-
+echo Bringing up a cluster
+/usr/local/bin/runner.sh \
+    /root/kubeadm-dind-cluster/fixed/dind-cluster-stable.sh up-shell "$@"

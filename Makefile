@@ -1,4 +1,4 @@
-# Copyright 2017 The Kubernetes Authors.
+# Copyright 2018 The Kubernetes Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,12 +14,14 @@
 
 VERSION = $(shell date +v%Y%m%d)-$(shell git describe --tags --always --dirty)
 
-IMG = "diverdane/conkube"
+IMG = "diverdane/kube-in-the-box"
+
+all: image
 
 image:
-	docker build --no-cache -t "$(IMG):$(VERSION)" --build-arg "IMAGE_ARG=$(IMG):$(VERSION)" .
+	docker build --no-cache -t "$(IMG):$(VERSION)" .
 
 push: image
 	gcloud docker -- push "$(IMG):$(VERSION)"
 
-.PHONY: image push
+.PHONY: all image push
