@@ -15,4 +15,8 @@ To spin up a containerized, multi-node cluster running in IPv6 mode, run:
 ```
 docker run --name ipv6_cluster_1 -it --privileged -e "IP_MODE=ipv6" diverdane/kube-in-the-box
 ```
+If you're running in an environment that has a local DNS server:
+```
+docker run --name ipv6_cluster_2 -it --privileged -e "IP_MODE=ipv6" -e "REMOTE_DNS64_V4SERVER=<your-dns-ip-addr>" diverdane/kube-in-the-box
+```
 
