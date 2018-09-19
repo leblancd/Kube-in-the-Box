@@ -21,6 +21,8 @@ ENV container docker
 
 ENV ARCH amd64
 
+ENV DIND_STORAGE_DRIVER vfs
+
 env DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get -y install \
@@ -43,9 +45,17 @@ RUN apt-get update && \
     apt-get clean
 
 ENV DOCKER_IN_DOCKER_ENABLED "true"
-# Clone the stable-fixed-version branch of the kubeadm-dind-cluster scripts
+# Clone the stable branch of the kubeadm-dind-cluster scripts
 RUN cd /root && \
-    git clone https://github.com/leblancd/kubeadm-dind-cluster.git --branch dockernet-172.20.0.0
+    git clone https://github.com/leblancd/kubeadm-dind-cluster.git --branch kube_in_the_box_master_check
+
+# TEMP: Add temporary version of bootstrap image's runner.sh
+# This temporary version runs a bash shell after the cluster is set up
+# so that the cluster can be used interactively before the cluster
+# is torn down and cleaned up. One potential way to address this
+# might be to modify kubeadm-dind-cluster to allow an option to run
+# a bash shell after setting up the cluster.
+ADD runner.sh /usr/local/bin/
 
 ADD kube_in_the_box_runner /
 ENTRYPOINT ["/bin/bash", "/kube_in_the_box_runner"]

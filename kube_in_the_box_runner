@@ -26,4 +26,4 @@ fi
 
 echo Bringing up a cluster
 /usr/local/bin/runner.sh \
-    /root/kubeadm-dind-cluster/fixed/dind-cluster-stable.sh up-shell "$@"
+    /root/kubeadm-dind-cluster/fixed/dind-cluster-stable.sh up "$@"
