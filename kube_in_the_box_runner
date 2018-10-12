@@ -24,6 +24,6 @@ if [[ "${IP_MODE}" == "ipv6" ]]; then
     sysctl -w net.ipv6.conf.all.disable_ipv6=0
 fi
 
-echo Bringing up a cluster
+echo Bringing up a cluster and starting a bash shell
 /usr/local/bin/runner.sh \
-    /root/kubeadm-dind-cluster/fixed/dind-cluster-stable.sh up "$@"
+    /bin/bash -c '/root/kubeadm-dind-cluster/fixed/dind-cluster-stable.sh up && /bin/bash'
