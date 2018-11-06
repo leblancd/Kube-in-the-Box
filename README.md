@@ -32,3 +32,18 @@ The following is required for the host on which you Docker run Kube-in-the-Box c
 # Running On a VirtualBox VM
 Kube-in-the-Box requires 12 GBytes of RAM on the host on which the Kube-in-the-Box container is being run. If you are Docker running Kube-in-the-Box containers on a VirtualBox VM, please make sure to set the VM's system memory size to at least 12 GBytes.
 
+# Sample Manifests
+There are several sets of sample kubernetes manifests that are copied to the kube-in-the-box container.
+
+## /workspace/sample-manifests/alpine
+
+## /workspace/sample-manifests/dual-stack-ingress
+
+## /workspace/sample-manifests/mysql
+
+## /workspace/sample-manifests/mysql_v6
+
+## /workspace/sample-manifests/nginx
+
+## /workspace/sample-manifests/nginx_v6
+

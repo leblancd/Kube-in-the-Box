@@ -47,5 +47,6 @@ RUN apt-get update && \
 RUN cd /root && \
     git clone https://github.com/kubernetes-sigs/kubeadm-dind-cluster.git --branch stable
 
+ADD sample-manifests /workspace/sample-manifests/
 ADD kube_in_the_box_runner /
 ENTRYPOINT ["/bin/bash", "/kube_in_the_box_runner"]

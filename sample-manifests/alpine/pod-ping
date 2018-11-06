@@ -1,0 +1,8 @@
+#! /usr/bin/bash
+
+# Create a pod named 'test-ping' using the alpine image and
+# attach to the pod (e.g. for running ping command).
+kubectl run test-ping --image=alpine -it --restart=Never --command -- /bin/sh
+
+# Delete the pod
+kubectl delete pod test-ping

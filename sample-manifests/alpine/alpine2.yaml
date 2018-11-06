@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine2
+  labels:
+    name: alpine2
+spec:
+  containers:
+    - name: prod-web
+      image: alpine
+      command: ["sh", "-c", "tail -f /dev/null"]
